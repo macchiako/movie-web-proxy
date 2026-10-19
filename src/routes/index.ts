@@ -12,7 +12,8 @@ import {
 
 export default defineEventHandler(async (event) => {
   // handle cors, if applicable
-  if (isPreflightRequest(event)) return handleCors(event, {});
+  handleCors(event, { origin: '*', methods: '*', allowHeaders: '*' });
+  if (isPreflightRequest(event)) return '';
 
   // parse destination URL
   const destination = getQuery<{ destination?: string }>(event).destination;
