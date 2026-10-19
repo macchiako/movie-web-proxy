@@ -1,16 +1,14 @@
-import { defineNitroConfig } from 'nitropack/config';
+import { join } from "path";
+import pkg from "./package.json";
 
 export default defineNitroConfig({
-  srcDir: 'src',
-  preset: 'cloudflare-module',
-  routeRules: {
-    '/**': {
-      cors: true,
-      headers: {
-        'access-control-allow-origin': '*',
-        'access-control-allow-methods': '*',
-        'access-control-allow-headers': '*',
-      },
-    },
+  preset: "cloudflare-module",
+  noPublicDir: true,
+  srcDir: "./src",
+  runtimeConfig: {
+    version: pkg.version
   },
+  alias: {
+    "@": join(__dirname, "src")
+  }
 });
